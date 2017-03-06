@@ -1,1 +1,3 @@
-# 17-03-DS-SF
+# Galvanize Data Science Immersive
+
+Fork this repo and add your exercises!
