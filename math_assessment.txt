@@ -1,0 +1,36 @@
+Math Assessment
+
+Refer to `math_assessment.pdf` for the questions. Please type your answers under
+each prompt in this document.
+
+
+1. Partial derivative of y with respect to x sin(z)(e^-x - x*e^-x)
+
+
+2. Xy= [14,10]
+
+
+3. Is X invertible? If so, give the inverse; if not, explain why not.
+
+inverse= [1.5,-0.5,-2,1]
+
+
+4. Rank of X: 2
+
+
+5. Sample mean: 0.6
+
+
+6. Sample variance 0.3
+
+
+7. Probability of data given fair coin: 0.3125
+
+
+8. Maximum likelihood probability: 0.6
+
+
+9. P(x=T | y=b)= 0.4
+
+
+
