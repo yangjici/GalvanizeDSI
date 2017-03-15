@@ -1,7 +1,7 @@
 import scipy.stats as scs
 import numpy as np
 import matplotlib.pyplot as plt
-
+import scipy as sp
 def make_draws(dist, params, size=200):
   """
   Draw samples of random variables from a specified distribution, with given
@@ -62,7 +62,7 @@ def plot_max(repeat,dist,params,size,show=False):
     if show:
         plt.show()
 
-filepath = "/Users/gSchool/Downloads/data/lunch_hour.txt"
+filepath = "/Users/twilightidol/Downloads/data2/lunch_hour.txt"
 lunch = np.loadtxt(filepath, delimiter=',')
 
 mu = np.mean(lunch)
@@ -99,13 +99,13 @@ this giving us a more precise CI
 def bootstrap(dat,resamp=10000):
     boot=[]
     for i in xrange(resamp):
-        newdat=[ dat[np.random.randint(0,len(dat))] for i in xrange(len(dat))]
+        newdat=[dat[np.random.randint(0,len(dat))] for _ in xrange(len(dat))]
         boot.append(newdat)
     return boot
 
+#PART 3
 
-
-filepath = "/Users/gSchool/Downloads/data/productivity.txt"
+filepath = "/Users/twilightidol/Downloads/data2/productivity.txt"
 prod = np.loadtxt(filepath, delimiter=',')
 
 
@@ -132,17 +132,16 @@ we believe that 95percent of the time the observed mean will be between -.22 and
 """ The sample size is not large enough. The standard error is too big"""
 
 #5
-def boostrap_ci(dat, funct,resamp=10000,cf=.95):
+def boostrap_ci(dat, funct,resamp=10000,cf=95):
+    samp=bootstrap(dat,resamp=resamp)
+    samp_stats=[np.mean(x) for x in samp ]
+    low_p = np.percentile(samp_stats,(100-cf)/2)
+    high_p = np.percentile(samp_stats,100-(100-cf)/2)
+    return (funct(samp_stats),low_p,high_p)
 
-    z=scs.norm.ppf((1+cf)/2)
-    samp=funct(dat)
-    mu=np.mean(samp)
-    stan_error = np.std(samp)/(len(samp)**.5)
-    low_p = mu-z*stan_error
-    high_p = mu+z*stan_error
+boostrap_ci(prod, np.mean,resamp=10000)
 
-    return (mu,stan_error,low_p,high_p)
-
+#6
 
 def bootstrap_mean(dat,resamp=10000):
     boot=[]
@@ -151,5 +150,69 @@ def bootstrap_mean(dat,resamp=10000):
         boot.append(np.mean(newdat))
     return boot
 
-plt.hist(bootstrap_mean(prod))
+# plt.hist(bootstrap_mean(prod))
+# plt.show()
+
+#7
+#the bootstrap CI suggest the CI for the sampled mean
+#amount of worth from changing the monitor is between 2000*4.785 and 2000*5.32
+#and the cost of changing monitor is 100*500, there fore the cost outweights the
+#benefit and does not recommend switching
+
+
+#PART 4
+
+filepath = "/Users/twilightidol/Downloads/data2/law_sample.txt"
+law = np.loadtxt(filepath, delimiter=' ')
+
+x=sp.array([d[0] for d in law])
+y=sp.array([d[1] for d in law])
+
+r_row, p_value = scs.pearsonr(x, y)
+
+z=scs.norm.ppf((1+.95)/2)
+
+
+se=(1/(len(x)))**0.5
+
+
+
+
+
+def boostrap_ci_r(dat, funct,resamp=10000,cf=95):
+    samp = bootstrap(dat, resamp=resamp)
+    r_vals=[]
+    for ls in samp:
+        x=[d[0] for d in ls]
+        y=[d[1] for d in ls]
+        r_row, p_value = funct(x,y)
+        r_vals.append(r_row)
+
+    low_p = np.percentile(r_vals,(100-cf)/2)
+    high_p = np.percentile(r_vals,100-(100-cf)/2)
+
+    return (r_vals,low_p,high_p)
+
+
+
+boot_r=boostrap_ci_r(law, scs.pearsonr,resamp=10000,cf=95)[0]
+
+plt.hist(boot_r)
+
 plt.show()
+
+
+
+#5
+
+
+filepath = "/Users/twilightidol/Downloads/data2/law_all.txt"
+law_all = np.loadtxt(filepath, delimiter=' ')
+
+x=sp.array([d[0] for d in law_all])
+y=sp.array([d[1] for d in law_all])
+
+r_row, p_value = scs.pearsonr(x, y)
+
+#yes it is within the range of value for CI
+
