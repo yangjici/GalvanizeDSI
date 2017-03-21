@@ -82,5 +82,67 @@ df5 = df.groupby(['date','hour'],as_index=True).count().trip_id
 
 hour_flat = df5.unstack(level=1)
 
+
 hour_flat.boxplot()
+
+
+
+
+#6
+
+fig, ax_list = plt.subplots(1, 2)
+
+
+df_weekday = df[df["weekday"]].groupby(['date','hour'],as_index=True).count().trip_id
+
+hour_week_flat = df_weekday.unstack(level=1)
+
+hour_week_flat.boxplot(ax=ax_list[0])
+
+ax_list[0].set_title('weekday')
+
+
+df_weekend = df[df["weekday"]==False].groupby(['date','hour'],as_index=True).count().trip_id
+
+hour_weekend_flat = df_weekend.unstack(level=1)
+
+hour_weekend_flat.boxplot(ax=ax_list[1])
+
+ax_list[1].set_title("weekend")
+
+
+#7
+
+def set_axis_options(ax, title):
+   ax.set_ylim(0, 200)
+   ax.set_xlabel('Hour of the Day', fontsize=14)
+   ax.set_ylabel('User Freq.', fontsize=14)
+   ax.title(title)
+
+def plot_trends2(df, customer_type):
+   df = df[df['subscription_type'] == customer_type] # Customer
+
+   wkday_df = df[df['dayofweek'] <= 5]
+   wkend_df = df[df['dayofweek'] > 5]
+
+   wkday_date_hour_cnt = wkday_df.groupby(['date', 'hour']).count()['count'].reset_index()
+   wkend_date_hour_cnt = wkend_df.groupby(['date', 'hour']).count()['count'].reset_index()
+
+   wkday_gpby = wkday_date_hour_cnt.groupby('hour')
+   wkend_gpby = wkend_date_hour_cnt.groupby('hour')
+
+   wkday_lst = [wkday_gpby.get_group(hour)['count'] for hour in wkday_gpby.groups]
+   wkend_lst = [wkend_gpby.get_group(hour)['count'] for hour in wkend_gpby.groups]
+
+   fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
+   ax1.boxplot(wkday_lst)
+   ax2.boxplot(wkend_lst)
+   set_axis_options(ax1, 'Weekday')
+   set_axis_options(ax1, 'Weekend')
+   plt.suptitle(customer_type, fontsize=16, fontweight='bold')
+   plt.tight_layout()
+
+plot_trends2(df, 'Subscriber')
+plot_trends2(df, 'Customer')
 plt.show()
+
