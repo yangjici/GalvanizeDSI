@@ -49,3 +49,27 @@ plt.xlabel("False Positive Rate (1 - Specificity)")
 plt.ylabel("True Positive Rate (Sensitivity, Recall)")
 plt.title("ROC plot of fake data")
 plt.show()
+
+
+
+
+#FICO loan
+df = pd.read_csv('~/Downloads/loanf.csv')
+y = (df['Interest.Rate'] <= 12).values
+X = df[['FICO.Score', 'Loan.Length', 'Loan.Amount']].values
+
+
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+model = LogisticRegression()
+model.fit(X_train, y_train)
+probabilities = model.predict_proba(X_test)[:, 1]
+
+
+tpr, fpr, thresholds = roc_curve(probabilities, y_test)
+
+plt.plot(fpr, tpr)
+plt.xlabel("False Positive Rate (1 - Specificity)")
+plt.ylabel("True Positive Rate (Sensitivity, Recall)")
+plt.title("ROC plot of RICO data")
+plt.show()
