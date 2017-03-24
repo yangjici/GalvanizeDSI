@@ -1,0 +1,102 @@
+** Probability **
+
+1. The bias of a coin is 0.6 in favor of heads. What is the probability of flipping 
+8 or more heads in 10 flips?
+
+1- cdf(7, 10, 0.6, loc=0) = 0.1672898
+
+2. You've found a secret admirer note on your desk, and don't know
+who it might've come from but you know it must've been one of your 
+three office mates:  Jack, John, or Jimmy.  
+- As of yesterday, you thought it was twice as likely that Jimmy had a crush on you than John,
+and that John and Jack were equally likely to have a crush on you.  
+- However even if Jimmy liked you, you think there'd only be 5% he'd leave you a note.
+- On the other hand, if Jack liked you there'd be a whopping 50% chance he'd leave you a note.
+and if John liked you, there'd be a 20% chance he'd leave you a note. 
+
+What's the probability that the note came from John?
+
+PJimmy=0.5, PJohn = 0.25, PJack = 0.25
+
+P(Note|Jim) = 0.05
+
+P(Note|jack) = 0.5
+
+P(Note|John) = 0.2
+
+P(Note) =0.2 (law of total probability)
+
+P(John|Note) = P(Note|John)*PJohn/ P(note) = 0.0625
+
+** Statistics **
+
+Below are the total number of log-ins for 20 different randomly selected users from 2014:
+    [10, 25, 12, 35, 14, 18, 16, 15, 22, 10, 9, 11, 49, 20, 15, 9, 18, 19, 20, 20]
+
+3. What is the sample mean?
+
+18.35
+
+4. What is the sample variance?
+
+91.5
+
+5. If we randomly select another user from 2014, what is the probability that he/she 
+has more than 15 log-ins?  
+
+0.55
+
+
+6. Sales targets weren't met last year.  The sales department asserts that on average, 
+there were only 10 log-ins per user, however the web team thinks there were more.  
+Set up a frequentist hypothesis test and compute a p-value based on your data.  
+
+Null: The average is 10 or less logins per user
+
+Alternative: The average is greater than 10 logins per use
+
+Alpha = 0.05
+
+Using t-test of one sample compare to mu of 10, we found p-value ~ 0.001
+
+We reject null hypothesis with 95 percent confidence and conclude that that average user log in is greater than 10 per user.
+
+
+
+7. A major charity organization is interested to see if changing the mission 
+statement on the website increases donations. As a pilot study, they randomly 
+show 1 of 10 newly drawn up mission statements to each user that comes to the site.  
+As such, you set up 10 separate hypothesis tests, each testing whether or not 
+there was an increase in donations. What adjustments would you make to account for the 10 tests? 
+
+
+I would make bonferoni adjustment to each individual confidence to the confidence level of 1 - alpha/10, alpha being the p-value that is not specified in the question
+
+**  Modeling **
+
+8.  Generally, when we increase the flexiblity or complexity of the model, what happens to bias?  What about variance?
+
+Increasing the complexity of the model leads to lower bias and higher variance
+
+What do we expect to happen to the training error?  What about the test error?
+
+We would expect training error to decrease and test error to increase
+
+9.  You have two models:
+Model 1:   Salary ~ Occupation + Height + Gender
+Model 2:   Salary ~ Occupation + Region + Height + Gender
+
+Name 2 appropriate ways to compare these two models.
+
+Cross validation of the model’s performance on training and validation data using the following criteria:
+
+1.The general linear f test
+
+2. Compare model difference in AIC, BIC, Mallows Cp depending on whether we want to be more conservative or less conservative (using the model for descriptive or predictive reasons)
+
+For descriptive purpose we can be more conservative while for predictive purpose we want to favor parsimony. 
+
+
+Name 1 inappropriate way to compare these two models.  
+
+Using the model with larger R^2 does not reflect the model’s merit or it’s predictive performance
