@@ -52,7 +52,7 @@ the performance of the tree.
 we would get about the same result
 
 14. n_estimator dictates the number of trees used to serially predict on the error of previous tree, learning rate refers to 
-the weight on the learning function of each tree, in adaboost as the number of n_estimator increases, the learning rate
+the weight on the learning function of each tree.
 
 
 15. Tuning max_features and sub_sample to having each tree focus on a part of the features or part of the samples
@@ -62,4 +62,6 @@ allowing each tree to have between tree variance in order to reduce the overall 
 16. In boosting we expect test error to decrease then increase as we build more trees  
 In random forest, we expect test error to decrease in general as we build more trees
 
-17.
+17. Lasso/Ridge: Lambda, as we increase lambda, we expect bias to increase and variance to decrease
+SVM: C, as we decrease C, small margin, lower bias, higher variance
+
