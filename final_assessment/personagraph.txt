@@ -1,0 +1,8 @@
+1.
+
+
+I plan on using naive bayes classifier with stemmer to classify reviews
+I justify using stemmer as the classification is binary and thus the words does
+not need capture too much nuance in the content, thus stemming allow us to have
+strong predictive power in the case of binary classification in which less nuance
+is contained in the article x
