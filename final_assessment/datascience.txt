@@ -1,0 +1,91 @@
+1.
+
+P(A+): prob of rolling fair die with 1-6
+P(B): prob of rolling 6
+
+P(B) = P(B|A+)*P(A+)+ P(B|A-)*P(A-) = 1/6*1/2+1/2*1/2
+
+P(A+|B) = P(B|A+) * P(A+)/P(B) = (1/6*1/2)/(1/3) = 1/4
+
+Probability of rolling fair dice given rolling a six is 1/4
+
+2.
+
+a. 2*5 = 10 users
+b. Use poisson distribution
+
+lambda = 2*5 = 10
+
+poisson.pmf(0,10) = 4.53*10**-5
+
+3.
+
+a.
+Definition of rank is the number of linearly independent rows or columns
+the rank would be 3 because total score is a linear combination of assignment
+1 and assignment 2 score (linearly dependent), while percentage is a non-linear combination and is
+thus not linearly dependent.
+
+b.
+
+from scipy.linalg import lu
+
+m=np.matrix([[1,12,19,31,0.62],
+[2,20,21,41,0.82],
+[3,15,22,37,0.74],
+[4,14,9,23,0.46],
+[5,25,25,50,1.00]])
+
+lu(m)
+
+4.
+H0: Pa >= Pb
+Ha: Pa < Pb
+
+
+Pa=(103/612) = 0.168
+Pb = (144/595) = 0.242
+n1 = 612
+n2=595
+
+p_hat = (103+144)/(612+595) = 0.204
+
+SEpool = np.sqrt(p_hat*(1.0-p_hat)*(1/n1+1/n2)) = 0.023
+
+z=(pa-pb)/SEpool
+
+given that p_value >0.05, we reject the null hypothesis with 95% confidence and conclude that
+new version of website is better
+
+5.
+I would try to fit my model with a second degree polynomial regression, I would measure the success
+of my model by first checking the assumption of my model against the data (normality, independence, equal variacen etc)
+Then I would check for the significance of the predictor beta in the model, then I would check the
+MSE of the fit.
+
+6.
+
+As the model complexity increases, both the training error and testing error decrease at first,
+as we approach an optimal fit, however as the complexity increase further, we overfit the training data
+aka having a high variance resulting in the model not being able to generalize to the test data.
+
+I would suggest using a complexity of around 5 for the optimal choice as it is a good balance of trade off
+between bias and variance related testing error
+
+7.
+a. an ensemble model using model A and model B
+b. I would like to know about the precision and recall of these model, then finally use a beta
+score with higher focus on precision as to avoid classifying non-spam email as spam
+
+8.
+
+First I would find the outliers observations that are way to high, I would examine the specific case
+for that entry to ensure it is not an unusual circumstance before deleting it.
+I would probably also look at entries that are also zero to see if there is any sysmatic issues with entry
+
+9.
+
+a. model black
+b. model black
+c. i will pick red model with sensitivity of less than 0.5 for case 1
+I will pick black model with sensitivity of at least 0.7 for case 2

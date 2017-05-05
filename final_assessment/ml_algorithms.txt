@@ -1,0 +1,82 @@
+1.
+with one unit increase in x3, while hold other variables constant, the target feature on average
+decreases by 0.0174 unit
+
+R-square tell us the three predictors collectively account for 93.3 percent of the variation
+in outcome variable
+R-adjusted square tell us that, after penalizing  three additional predictors, the three predictors
+collective account for 92.8 percent of the variation in outcome variable
+
+2.
+
+If with one meter incease in distance to clean_well , while holding other predictors constant,
+the odds of switching on average is multiplied by exp(-0.009) = 0.991,
+Given the standard error is fairly large and almost as large as the effect size, I would
+check for the significance of the predictor.
+
+3.
+
+Bias is the model's source of error due to it's inability to capture the trends and signals
+in the general testing setting due to being overly simple , Variance is the model's inability to
+generalize to the general testing setting due to being overly complex that it is fitting a lot
+of noise component in the training data
+
+b: decrease bias and increase variance
+
+c: increase bias and decrease variance
+
+d: Ridge and lasso penalize the complexity of the model to prevent overfitting (high variance)
+The cost function that the model selection process is minimizing is being penalized
+
+4. I would use SVM classification with RBF kernels because the dataset is perfectly separable
+and kernel choice being a smoothing constant that captures the roundness of the dataset
+
+5.
+
+
+
+6.
+
+a. Bagging allow the multiple trees to make decisions on a boostrapped dataset that increases
+the variance between the trees that in effect reduces the variance in the model
+
+b. similar answer as a except even more variance between trees: trees are decorrelated and
+thus able to produce even less variance in testing cases
+
+c. boosting uses weak learners: each tree in boosting is a nerf-ed version of the trees in RF
+boosting fits on the errors that is made by previous free in a serial fashion as opposed
+to parallel growth in RF
+
+7.
+
+The 1st Principal Component is simply a linear combination of the feature space that produces the
+largest variance, subject to the constraint that their sum of square is 1. Similarly,
+the 2nd principal component...3rd principal component...and so forth can be constructed similarly,
+ subject to the additional constraint that they decrease monotonically.
+
+The first k principal components can be thought of as all of your data projected
+into a 1-dimensional space.
+
+We can tell how much of the percentage of variation in the data is explained by the first k principal
+components by examining the proportion of the kth component to the sum of components.
+
+To perform Principal Components Regression, we can take the princinpal component of predictors
+and use them simply as predictors in Linear Regression.
+
+
+
+8. Dataset without a lot of rows become very sparse in higher dimensions, that the distance metrics
+between even the nearest two points becomes infintely large as the number of dimensions increases,
+since both knn and k-means uses distance metrics to make decision regarding clustering,
+the accuracy and calculation time is increased, and numerical overflow may occur as well.
+
+9.
+
+Naive bayes consider all the observations to be independent of another, which is not the card-shop-name
+especially in NLP where language whose occurance is highly correlated and dependent, would
+recommend using memory-based Markov chain to capture the dependence
+
+10.
+
+Lasso/Ridge (penalize higher scale data more), k-means ,
+kNN (too much weight on higher scaled data), SVM (idk)
