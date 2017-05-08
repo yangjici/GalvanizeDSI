@@ -5,8 +5,6 @@ from PIL import Image
 import requests
 import time
 
-#API key fd7bb2c9fd2a440abe8963b1d0ebec94
-
 
 def single_query(link, payload):
     response = requests.get(link, params=payload)
